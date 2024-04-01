@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions
 
       - name: Install Node.js and npm
-        uses: actions/setup-node@v2
+        uses: actions
         with:
           node-version: '14'
 
@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Archive Production Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions
         with:
           name: build
           path: build
@@ -36,10 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions
 
       - name: Download Artifact
-        uses: actions/download-artifact@v2
+        uses: actions
         with:
           name: build
           path: build
