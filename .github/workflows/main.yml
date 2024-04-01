@@ -6,46 +6,26 @@ on:
       - main
 
 jobs:
-  build:
-    name: dist
+  deploy:
+    name: Deploy to Firebase Hosting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions
+        uses: actions/checkout@v2
 
-      - name: Install Node.js and npm
-        uses: actions
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build 
+      - name: Build
         run: npm run build
 
-      - name: 
-        uses: actions
-        with:
-          name: build
-          path: build
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions
-
-      - name: Deploy
-        uses: actions
-        with:
-          name: build
-          path: build
-
       - name: Deploy to Firebase
-        uses: w9jds
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
